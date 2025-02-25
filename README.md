@@ -17,10 +17,26 @@ docker build --build-arg TARGETARCH=$(uname -m) -t exiftool-docker:latest .
 
 This command will build the Docker image for the appropriate architecture (amd64, arm, or arm64).
 
-## Running the Docker Container
+## Running the exiftool
+```sh
+docker run -v $(pwd):/data -w /data ghcr.io/gewoonjaap/exiftool-docker:latest FILENAME
+```
+
+## Aliasing the docker command
+You can alias the docker command to be able to run exiftool directly in your terminal. Add the following to your `.bashrc`
+```sh
+alias exiftool='docker run -v $(pwd):/data -w /data ghcr.io/gewoonjaap/exiftool-docker:latest $1'
+```
+
+Then you can use the following in your terminal, which will run the command in the docker container
+```sh
+exiftool FILENAME
+```
+
+## Opening the docker container
 - Run the docker container with the following command:
 ```sh
-docker run -it -v <MEDIALOCATION>:/data ghcr.io/gewoonjaap/exiftool-docker:latest
+docker run -it -v <MEDIALOCATION>:/data ghcr.io/gewoonjaap/exiftool-docker:latest /bin/bash
 ```
 
 This command will run the ExifTool CLI in the Docker container and mount the desired directory to the `/data` directory in the container.

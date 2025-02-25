@@ -15,5 +15,7 @@ RUN apk add --no-cache \
 
 RUN git clone https://github.com/exiftool/exiftool.git /usr/src/app/exiftool
 
+RUN ln /usr/src/app/exiftool/exiftool -s /usr/bin/exiftool
+
 # Set the entrypoint
-CMD ["bash"]
+ENTRYPOINT ["exiftool"]
